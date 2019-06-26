@@ -1,12 +1,26 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
+class App extends Component {
 
-    </div>
-  );
+  state = {
+    history: [],
+    current: {
+      operand1: 0,
+      operand2: 0,
+      operator: ' ',
+      solution: 0
+    }
+  }
+
+
+  render(){
+    return(    
+      <section className="App">
+
+      </section>
+    )
+  };
 }
 
 export default App;
