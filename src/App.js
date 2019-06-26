@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import InputGrid from './InputGrid/InputGrid';
 
 import './App.css';
 
@@ -28,7 +29,7 @@ class App extends Component {
   render(){
     return(    
       <section className="App">
-
+        <InputGrid/>
       </section>
     )
   };
