@@ -9,7 +9,6 @@ const historyReducer = ( state= [] , action) => {
   }
 }
 
-
 const rootReducer = combineReducers({
   historyReducer
 });

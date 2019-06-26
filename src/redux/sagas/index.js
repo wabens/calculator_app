@@ -4,7 +4,6 @@ import axios from 'axios';
 function* getHistory() {
   try{
     const result = yield axios.get('/calculator');
-    console.log(`result`, result.data);
     yield put({type: "SET_HISTORY", payload: result.data})
   }
   catch{

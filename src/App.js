@@ -16,8 +16,14 @@ class App extends Component {
   }
 
   componentDidMount(){
+    // Fetch solution history from database when the component intializes
     this.props.dispatch({type: 'GET_HISTORY'})
   }
+
+  // componentDidUpdate(){
+  //   // Fetch solution history if the components updates 
+  //   this.props.dispatch({type: 'GET_HISTORY'})
+  // }
 
   render(){
     return(    
