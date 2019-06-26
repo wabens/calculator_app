@@ -1,43 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-
 import { createStore, applyMiddleware } from 'redux';
-import { takeLatest, put } from 'redux-saga/effects';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import axios from 'axios';
+import logger from 'redux-logger';
+
+import rootReducer from './redux/reducers'; 
+import rootSaga from './redux/sagas'; 
+
+import App from './App';
 
 const sagaMiddleware = createSagaMiddleware();
 
+// this line creates an array of all of redux middleware you want to use
+// we don't want a whole ton of console logs in our production code
+// logger will only be added to your project if your in development mode
+const middlewareList = process.env.NODE_ENV === 'development' ?
+  [sagaMiddleware, logger] :
+  [sagaMiddleware];
 
-// get calculator history
-// query to database already limits history to last 10 entries
-function* getHistory(){
-  const result = yield axios.get('/calculator');
-  console.log(`result of getHistory`, result);
-  
-}
+const store = createStore(
 
-function* watcherSaga (){
-  yield takeLatest("GET_HISTORY", getHistory)
-}
-
-
-const storeInstance = createStore(
-
-  // combineReducers({
-
-  // }),
-  applyMiddleware(sagaMiddleware),
+  rootReducer,
+  applyMiddleware(...middlewareList),
 );
 
-sagaMiddleware.run(watcherSaga);
-ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+sagaMiddleware.run(rootSaga);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
+);

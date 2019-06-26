@@ -2,16 +2,17 @@
   "name": "calculator_full_stack",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "axios": "^0.19.0",
     "express": "^4.17.1",
     "pg": "^7.11.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-redux": "^7.1.0",
     "react-scripts": "3.0.1",
-    "redux": "^4.0.1",
-    "redux-saga": "^1.0.3",
-    "sagas": "0.0.1"
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^1.0.3"
   },
   "scripts": {
     "start": "node server/server.js",
