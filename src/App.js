@@ -21,11 +21,6 @@ class App extends Component {
     this.props.dispatch({type: 'GET_HISTORY'})
   }
 
-  // componentDidUpdate(){
-  //   // Fetch solution history if the components updates 
-  //   this.props.dispatch({type: 'GET_HISTORY'})
-  // }
-
   render(){
     return(    
       <section className="App">

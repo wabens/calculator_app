@@ -5,8 +5,7 @@ function* getHistory() {
   try{
     const result = yield axios.get('/calculator');
     yield put({type: "SET_HISTORY", payload: result.data})
-  }
-  catch{
+  } catch {
     alert(`Sorry, couldn't get the calculator history. Please try again later.`)
   }
 }

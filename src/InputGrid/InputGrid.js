@@ -130,9 +130,11 @@ class InputGrid extends Component {
     console.log(`state in inputGrid`, this.state);
     
     return(    
-      <section className="input-grid">
+      <section className='input-grid'>
         <div className='header-row'>
-          <p>{this.state.operand1 + ' ' + this.state.operator + ' ' + this.state.operand2}</p>
+          <div className = ''>
+            <p>{this.state.operand1 + ' ' + this.state.operator + ' ' + this.state.operand2}</p>
+          </div>
           <Button value={'C'} handleInput={this.handleInput}/>
         </div>
 

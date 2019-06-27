@@ -1,16 +1,15 @@
 import { combineReducers } from 'redux';
 
-const historyReducer = ( state= [] , action) => {
-  if (action.type === "SET_HISTORY"){
-    return action.payload
+const historyReducer = (state = [], action) => {
+  if (action.type === 'SET_HISTORY') {
+    return action.payload;
   }
-  else{
-    return state
-  }
-}
+
+  return state;
+};
 
 const rootReducer = combineReducers({
-  historyReducer
+  historyReducer,
 });
 
 export default rootReducer;
