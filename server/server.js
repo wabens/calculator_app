@@ -4,7 +4,7 @@ const app = express();
 
 const bodyParser = require('body-parser');
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 const calculator = require('./router/routes');
 
