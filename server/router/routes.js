@@ -6,7 +6,7 @@ const pool = require('../modules/pool');
 // Route to GET calculator history
 // http://localhost:5000/calculator
 router.get('/', (req, res) => {
-  pool.query(`SELECT * FROM "history" ORDER BY "time" ASC LIMIT 10;`)
+  pool.query(`SELECT * FROM "history" ORDER BY "time" DESC LIMIT 10;`)
     .then((result) => {
       res.send(result.rows);
     })

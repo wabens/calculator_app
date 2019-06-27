@@ -52,19 +52,29 @@ class InputGrid extends Component {
   // identifies which operand the value should be if input value is a number
   // if an operator has been chosen then operand2 should be filled
   identifyOperand = (value) => {
-    if(this.state.operator){
+    if(this.state.operator && this.operandLength(this.state.operand2)){
       this.setState({
         ...this.state,
         operand2: this.state.operand2 + value
-      })
+      });
     }
-    else{
+    else if(this.operandLength(this.state.operand1)){
       this.setState({
         ...this.state,
         operand1: this.state.operand1 + value
-      })
+      });
     }
   }
+
+  operandLength = (value) => {    
+    if(String(value).length > 4){
+      alert("That number's getting too long!")
+      return false
+    }
+    else{
+      return true
+    };
+  };
 
   // attempt to solve expression if input is '='
   // alert user if any input is empty
@@ -74,9 +84,9 @@ class InputGrid extends Component {
     }
     else{
       this.solveExpression()
-    }
+    };
 
-  }
+  };
 
   // rounds the second decimal place because toFixed isn't good enough
   roundToTwoDecimals = (solution) => {
@@ -85,7 +95,7 @@ class InputGrid extends Component {
     // round the one decimal number and bring it to a number with 2 decimals by dividing by 100
     let y = Math.round(x) / 100
     return y
-  }
+  };
 
   // solve expression after solving attempt is passed in attemptSolution
   // convert operands back to number, perform operation, dispatch to server, clear state
@@ -111,20 +121,20 @@ class InputGrid extends Component {
         solution = operand1 * operand2
         solution = this.roundToTwoDecimals(solution);
         break
-    }
+    };
 
     this.props.dispatch({
       type: "POST_EXPRESSION",
       payload: {...this.state, solution,}
-    })
+    });
 
     this.setState({
       operand1: '',
       operand2: '',
       operator: '',
       solution: ''
-    })
-  }
+    });
+  };
 
   render(){
     console.log(`state in inputGrid`, this.state);
