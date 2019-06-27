@@ -67,7 +67,7 @@ class InputGrid extends Component {
   }
 
   operandLength = (value) => {    
-    if(String(value).length > 4){
+    if(String(value).length > 8){
       alert("That number's getting too long!")
       return false
     }
