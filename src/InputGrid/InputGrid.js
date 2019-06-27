@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Button from './GridButton';
@@ -12,22 +13,21 @@ class InputGrid extends Component {
     floatTo: 0,
   }
 
-  display = () => {
-
-  }
-
   handleInput = (value) => {
     console.log(`input value`, value)
     if (typeof value === "string" ){
         this.identifyOperator(value)
     }
     else{
-        this.identifyOperand(value)
+        this.identifyOperand(String(value))
     }
   }
   
   handleDecimal = () => {
-
+    this.setState({
+      ...this.state,
+      floatTo: this.state.floatTo + 1
+    })
   }
 
   // identifies the operator in case input value is a string
@@ -42,10 +42,11 @@ class InputGrid extends Component {
         })
         break
       case "=":
-        this.solveExpression()
+        this.attemptExpression()
         break
       case '.':
-        this.handleDecimal()
+        // a decimal is both a string and part of the operand
+        this.identifyOperand(value)
         break
       default:
         this.setState({
@@ -73,8 +74,62 @@ class InputGrid extends Component {
   }
 
   // attempt to solve expression if input is '='
-  solveExpression = () => {
+  attemptExpression = () => {
+    if(!this.state.operand1 && !this.state.operator && this.state.operand2){
+      alert('Sorry, please enter two numbers and an operator');
+    }
+    else{
+      this.solveExpression()
+    }
 
+  }
+
+  // rounds the second decimal place because toFixed isn't good enough
+  roundToTwoDecimals = (solution) => {
+    // cut the solution to a string with 3 decimals and turn it into a number with 1 decimal by multiplying by 100
+    let x = Number(solution.toFixed(3)) * 100;
+    // round the one decimal number and bring it to a number with 2 decimals by dividing by 100
+    let y = Math.round(x) / 100
+    return y
+  }
+
+  solveExpression = () => {
+    let operand1 = Number(this.state.operand1);
+    let operand2 = Number(this.state.operand2);
+    let solution = '';
+    switch (this.state.operator){
+      case '+':
+        solution = operand1 + operand2        
+        solution = this.roundToTwoDecimals(solution);
+        break
+      case'-':
+        solution = operand1 - operand2
+        solution = this.roundToTwoDecimals(solution);
+        break
+      case'/':
+        solution = operand1 / operand2
+        solution = this.roundToTwoDecimals(solution);
+        break
+      case 'x':
+        solution = operand1 * operand2
+        solution = this.roundToTwoDecimals(solution);
+        break
+    }
+    this.setState({
+      ...this.state,
+      solution,
+    })
+  }
+
+  // returns the string to display
+  // either the expression or solution depending on if solution is present
+  toDisplay = () => {
+    if(this.state.solution){
+      return this.state.solution
+    }
+    else{
+      return this.state.operand1 + ' ' + this.state.operator + ' ' + this.state.operand2
+    }
   }
 
   render(){
@@ -83,31 +138,31 @@ class InputGrid extends Component {
     return(    
       <section className="input-grid">
         <div className='header-row'>
-          <p>{this.state.operand1 + ' ' + this.state.operator + ' '+ this.state.operand2}</p>
+          <p>{this.toDisplay()}</p>
           <Button value={'C'} handleInput={this.handleInput}/>
         </div>
 
-        <div clasName = 'grid-row'>
+        <div className = 'grid-row'>
           <Button value={7} handleInput={this.handleInput}/>
           <Button value={8} handleInput={this.handleInput}/>
           <Button value={9} handleInput={this.handleInput}/>
           <Button value={'/'} handleInput={this.handleInput}/>
         </div> 
 
-        <div clasName = 'grid-row'>
+        <div className = 'grid-row'>
           <Button value={4} handleInput={this.handleInput}/>
           <Button value={5} handleInput={this.handleInput}/>
           <Button value={6} handleInput={this.handleInput}/>
           <Button value={'x'} handleInput={this.handleInput}/>
         </div>
 
-        <div clasName = 'grid-row'>
+        <div className = 'grid-row'>
           <Button value={1} handleInput={this.handleInput}/>
           <Button value={2} handleInput={this.handleInput}/>
           <Button value={3} handleInput={this.handleInput}/>
           <Button value={'-'} handleInput={this.handleInput}/>
         </div>
-        <div clasName = 'grid-row'>
+        <div className = 'grid-row'>
           <Button value={0} handleInput={this.handleInput}/>
           <Button value={'.'} handleInput={this.handleInput}/>
           <Button value={'='} handleInput={this.handleInput}/>
