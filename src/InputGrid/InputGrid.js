@@ -14,6 +14,7 @@ class InputGrid extends Component {
 
   // Decides if to treat input value as operand or operator based on typeof number or string
   handleInput = (value) => {
+  
     if (typeof value === "string" ){
         this.identifyOperator(value);
     }
@@ -92,6 +93,7 @@ class InputGrid extends Component {
     let operand1 = Number(this.state.operand1);
     let operand2 = Number(this.state.operand2);
     let solution = '';
+
     switch (this.state.operator){
       case '+':
         solution = operand1 + operand2        
@@ -110,25 +112,18 @@ class InputGrid extends Component {
         solution = this.roundToTwoDecimals(solution);
         break
     }
-    this.props.dispatch({type: "POST_EXPRESSION", action: this.state})
+
+    this.props.dispatch({
+      type: "POST_EXPRESSION",
+      payload: {...this.state, solution,}
+    })
+
     this.setState({
       operand1: '',
       operand2: '',
       operator: '',
-      solution: '',
+      solution: ''
     })
-    
-  }
-
-  // returns the string to display
-  // either the expression or solution depending on if solution is present
-  toDisplay = () => {
-    if(this.state.solution){
-      return this.state.solution
-    }
-    else{
-      return this.state.operand1 + ' ' + this.state.operator + ' ' + this.state.operand2
-    }
   }
 
   render(){
@@ -137,7 +132,7 @@ class InputGrid extends Component {
     return(    
       <section className="input-grid">
         <div className='header-row'>
-          <p>{this.toDisplay()}</p>
+          <p>{this.state.operand1 + ' ' + this.state.operator + ' ' + this.state.operand2}</p>
           <Button value={'C'} handleInput={this.handleInput}/>
         </div>
 

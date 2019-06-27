@@ -18,6 +18,8 @@ router.get( '/', ( req, res ) => {
 // Route to POST expression
 router.post( '/', (req, res) => {
   const expression = req.body;
+  console.log(`req.body`, req);
+  
   const values = [
     expression.operand1, 
     expression.operand2,

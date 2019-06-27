@@ -6,6 +6,7 @@ const PORT = 5000;
 const calculator = require('./router/routes');
 
 app.use(express.static('./server/public'));
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true
 }));
