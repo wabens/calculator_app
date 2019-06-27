@@ -10,27 +10,19 @@ class InputGrid extends Component {
     operand2: '',
     operator: '',
     solution: '',
-    floatTo: 0,
   }
 
+  // Decides if to treat input value as operand or operator based on typeof number or string
   handleInput = (value) => {
-    console.log(`input value`, value)
     if (typeof value === "string" ){
-        this.identifyOperator(value)
+        this.identifyOperator(value);
     }
     else{
-        this.identifyOperand(String(value))
+        this.identifyOperand(String(value));
     }
-  }
+  };
   
-  handleDecimal = () => {
-    this.setState({
-      ...this.state,
-      floatTo: this.state.floatTo + 1
-    })
-  }
-
-  // identifies the operator in case input value is a string
+  // identifies the operator if input value is a string
   identifyOperator = (value) => {
     switch (value){
       case "C":
@@ -56,7 +48,7 @@ class InputGrid extends Component {
     }
   }
 
-  // identifies which operand the value should be in case input value is a number
+  // identifies which operand the value should be if input value is a number
   // if an operator has been chosen then operand2 should be filled
   identifyOperand = (value) => {
     if(this.state.operator){
@@ -74,8 +66,9 @@ class InputGrid extends Component {
   }
 
   // attempt to solve expression if input is '='
+  // alert user if any input is empty
   attemptExpression = () => {
-    if(!this.state.operand1 && !this.state.operator && this.state.operand2){
+    if(this.state.operand1 === '' || this.state.operator === '' || this.state.operand2 === ''){
       alert('Sorry, please enter two numbers and an operator');
     }
     else{
@@ -93,6 +86,8 @@ class InputGrid extends Component {
     return y
   }
 
+  // solve expression after solving attempt is passed in attemptSolution
+  // convert operands back to number, perform operation, dispatch to server, clear state
   solveExpression = () => {
     let operand1 = Number(this.state.operand1);
     let operand2 = Number(this.state.operand2);
@@ -115,10 +110,14 @@ class InputGrid extends Component {
         solution = this.roundToTwoDecimals(solution);
         break
     }
+    this.props.dispatch({type: "POST_EXPRESSION", action: this.state})
     this.setState({
-      ...this.state,
-      solution,
+      operand1: '',
+      operand2: '',
+      operator: '',
+      solution: '',
     })
+    
   }
 
   // returns the string to display
