@@ -24,3 +24,16 @@ button{
   margin: 4px;
   padding-right: 4px
 }
+
+.history-section{
+  width:100%
+}
+
+ul{
+  list-style: none
+}
+
+.expression-row{
+  display: flex;
+  justify-content: center;
+}
