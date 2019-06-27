@@ -4,6 +4,8 @@ A simple full-stack calculator app using react, node and postgreSQL. Displays th
 
 [Try it](https://frozen-peak-21569.herokuapp.com/)
 
+<img src="public/screenshots/main_view.png">
+
 ## Built With
 
 - HTML
