@@ -1,68 +1,56 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Calculator
 
-## Available Scripts
+A simple full-stack calculator app using react, node and postgreSQL. Displays the most 10 most recent expressions below the calculator.
 
-In the project directory, you can run:
+[Try it](https://frozen-peak-21569.herokuapp.com/)
 
-### `npm start`
+## Built With
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- HTML
+- CSS
+- JavaScript
+- Axios
+- Express
+- Nodemon
+- Pg
+- React/Redux/Saga
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+- [Node.js](https://nodejs.org/en/)
+- [Postico](https://eggerapps.at/postico/)
+- [Postman](https://www.getpostman.com/)
+- [IDE - Virtual Studio Code Recommended](https://code.visualstudio.com/)
+- [Heroku - Create Account](https://www.heroku.com/)
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installing
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Download this project via zip
+2. Create a repository on github for this project
+3. Open downloaded zip of project in your IDE
+4. Follow the instructions outlined on Github for ... or create a new repository on the command line (these immediately follow the creation of a new repository)
+5. Create database in Postico with database name of 'calculator'
+6. Insert sql-text from database.sql file located in server root into database sql-query in Postico
+7. Execute sql queries to create tables
+8. In terminal, start postgres server (this will start calculator database)
+9. In terminal, create development server by typing `npm run client` and `npm run server` (this will run application locally)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Deploying
+1. Install Heroku CLI by typing `brew install heroku` in Terminal
+2. Authenticate by typing `heroku login` in Terminal
+3. In terminal, navigate to your project folder and type `heroku create`
+4. In terminal, type `git remote -v` to ensure it added successfully
+5. In terminal, type `git push heroku master`
+6. In terminal, type `heroku addons:create heroku-postgresql:hobby-dev` to set up Postgresql on your Heroku project
+7. In terminal, type `heroku pg:push calculator DATABASE_URL` to copy your database contents up to Heroku. 
+8. If changes are made within the IDE and you want them reflected on Heroku following the following prompts:
+  - `git add .`
+  - `it commit -m "MESSAGE"`
+  - `git push heroku master`
